@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+</style>
+<body>   
+    <div id="app">
+        <runoob></runoob>
+        <rrr></rrr>
+    </div>
+    <script>
+    var Child = {
+      template: '<h1>{{msg}}</h1>',
+      data() {
+        return {
+          msg:'dfsfs'
+        }
+      },
+    };
+    var Child1 = {
+      template: '<h1>自ff定义组件!</h1>'
+    }
+    
+    // 创建根实例
+    new Vue({
+      el: '#app',
+      components: {
+        // <runoob> 将只在父模板可用
+        'runoob': Child,
+        'rrr':Child1
+      }
+    })
+    </script>
+    </body>
+    </html>

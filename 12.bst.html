@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="li">
+        
+        <div class="panel panel-primary">
+              <div class="panel-heading">
+                    <h3 class="panel-title">添加品牌</h3>
+              </div>
+              <div class="panel-body form-inline">
+                <div class="form-group">
+                    <label for="name">名称</label>
+                    <input type="text" class="form-control" v-model="name">
+                </div>
+                <input type="button" value="添加" class="btn btn-primary" @click="add()">               
+            </div>
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Ctime</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in list" :key="item.id">
+                    <td>{{ item.id}}</td>
+                    <td>{{ item.name}}</td>
+                    <td>{{ item.citme}}</td>
+                    <td><a href="">删除</a></td>
+                </tr>
+            </tbody>
+        </table>     
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:'#li',
+        data:{
+            name:'',
+            list:[
+                {id:1,name:'五菱宏光',citme:new Date()},
+                {id:2,name:'五d宏光',citme:new Date()}
+            ]
+        },
+        created(){
+            this.getAllList();
+        },
+        methods:{
+            add(){
+                 this.$http.post('https://localhost/21.json',{name:this.name},{
+              emulateJSON:true
+                  }).then(res=>{
+                     var res = res.body;
+                     if(res.status===0){
+                         this.getAllList();
+                     }else{
+                         alert("添加失败！");
+                     }
+                 })
+            },
+            getAllList(){
+                 this.$http.get('http://localhost/f/2.json').then(res=>{
+                    var res = res.body; 
+                    if(res.status===0){
+                         this.list = res.message;
+                     }else{
+                         alert("获取数据失败！");
+                     }
+                 })   
+            }
+        }
+    })
+</script>

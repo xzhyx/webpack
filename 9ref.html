@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+</style>
+<body>   
+<div id="app">
+       <input ref="input" type="button" value="获取页面元素" @click="get()">
+       <h3 ref="h3">dfsfafaffas</h3>
+       <tem ref="mytem"></tem>
+</div>
+<script>
+    var tem = {
+        template:'<h2>组件1</h2>',
+        data() {
+            return {
+                msg:'子组件数据'
+            }
+        },
+        methods: {
+            get1(){
+                console.log('子组件方法');
+            }
+        },
+    }
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+          get(){
+              console.log(this.$refs.h3.innerText);
+              console.log(this.$refs.mytem.msg);
+              this.$refs.mytem.get1();
+          }
+      },
+      components:{
+          tem
+      }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .my-enter,
+    .my-leave-to{
+      opacity: 0;
+      transform: translateX(150px);
+    }
+    .my-enter-active,
+    .my-leave-active{
+        transition: all 1s ease;
+    }
+</style>
+<body>
+    
+    <div id="li">
+          <input type="button" value="加入" @click="flag=!flag">
+          <transition name="my">
+            <p v-show=flag>fdfdfdfd</p>
+          </transition>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:'#li',
+        data:{
+            flag:true
+        },
+        methods:{
+            // beforeEnter(el){
+            //     el.style.tranform = "tranlate(0,0)"
+            // },
+            // enter(el){@before-enter="beforeEnter"
+         // @enter="enter"
+         // @after-enter="afterEnter"
+            //     el.offsetWidth
+            //     el.style.tranform = "tranlate(150px,450px)";
+            //     el.style.transition = "all 1s ease"
+            // },
+            // afterEnter(el){
+
+            // }
+        }
+    })
+</script>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+</style>
+<body>
+    <div id="li">
+      <com></com>
+      <con v-bind:ppmsg="msg" v-on:show1="show"></con>
+    </div>
+    <template id="temp">
+        <div>
+            <h1>自ff定义组件!{{ppmsg}}{{tittle}}</h1>
+            <input type="button" value="调用父组件的方法" @click="show2">
+        </div>
+    </template>
+</body>
+</html>
+<script>
+    var con = {
+        template:"#temp",
+        props:['ppmsg'],
+        methods: {
+            show2(){
+                this.$emit('show1',this.sonmsg);
+            }
+        },
+        data() {
+            return {
+                tittle:'123',
+                content:'qqqqq',
+                sonmsg:{
+                    tittle:'666',
+                    content:'888'
+                }
+            }
+        },
+    };
+    var Child1 = {
+      template: '<h1>自ff定义组件!</h1>'
+    };
+    var vm = new Vue({
+        el:'#li',
+        data:{
+            flag:true,
+            msg:'父组件的数据',
+            msgfrom:null
+        },
+        methods:{
+            show(data){
+                this.msgfrom=data;
+                alert('我是父组件的方法'+'.....'+this.msgfrom);
+            }
+        },
+        components:{
+            'com':Child1,
+            con
+        }
+    })
+</script>

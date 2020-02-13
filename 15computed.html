@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .router-link-active,.myactive{
+            color: red;
+            font-size: 30px;
+            font-weight: 80px;
+            font-style: 80px;
+            text-decoration: underline;
+            background-color: #666666;
+        }
+        .v-ernter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px);
+        } 
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease;
+        }
+    </style>
+</head>
+<body>   
+    <div id="app">
+        <input type="text" v-model='f'>
+        <input type="text" v-model='l'>
+        <input type="text" v-model='m'>
+        <p>{{ f }}</p>
+        <p>{{ f }}</p>
+        <p>{{ f }}</p>
+    </div>
+<script>
+    var login = {
+        template:'<h3>login组件</h3>',
+        data() {
+            return {
+                msg:'123'
+            }
+        },
+        created() {
+            console.log(this.$route.params.id);
+        },
+    }
+    var register = {
+        template:'<h3>register组件</h3>'
+    }
+    var router1 = new VueRouter({
+        //表示路由匹对规则
+        routes:[
+            //每个路由规则都是一个对象
+            //属性1：path表示监听哪个路由链接地址
+            //属性2：component表示根据path路由，展示相应的component
+            //注意：component必须是一个模板对象，不能是一个组件的名称
+            {path:'/',redirect:login},
+            {path:'/login:13',component:login},
+            {path:'/register',component:register}
+        ],
+        linkActiveClass:'myactive'
+    })
+    var vm = new Vue({
+      el: '#app',
+      data:{
+          f:'',
+          l:''
+      },
+      //计算属性是一个方法，但是在应用的时候一定不要加()，直接把它当做普通属性去使用
+      //计算属性内部的  任何数据只要发生变化，   那么就会  立即重新计算属性的值
+      //计算属性的求值 结果会被缓存起来  ，方便下次的调用，如果计算属性中的   数据都没有发生变化，那么就不会重新计算值
+     computed: {
+         'm':function(){
+             console.log('次数');
+             return this.f + this.l;
+         }
+     },
+      methods: {
+          get(){
+              console.log(this.$refs.mytem.msg);
+              this.$refs.mytem.get1();          
+            }
+      },
+      router:router1//将router注册到VM实例上
+    })
+</script>
+</body>
+</html>

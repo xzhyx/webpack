@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .ball{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+    }
+</style>
+<body>
+    
+    <div id="li">
+          <input type="button" value="加入" @click="flag=!flag">
+          <transition
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter">
+            <div class="ball" v-show=flag></div>
+          </transition
+          >
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:'#li',
+        data:{
+            flag:false
+        },
+        methods: {
+            beforeEnter(el){
+                el.style.transform = "translate(0,0)"
+            },
+            enter(el,done){
+                el.offsetWidth
+                el.style.transform = "translate(150px,450px)";
+                el.style.transition = "all 1s ease";
+                done();
+            },
+            afterEnter(el){
+                this.flag=!this.flag;
+                // el.style.opacity=0.5;
+            }
+        }
+    })
+</script>

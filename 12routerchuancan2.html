@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <style>
+        .router-link-active,.myactive{
+            color: red;
+            font-size: 30px;
+            font-weight: 80px;
+            font-style: 80px;
+            text-decoration: underline;
+            background-color: #666666;
+        }
+        .v-ernter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px);
+        } 
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 1s ease;
+        }
+    </style>
+</head>
+<body>   
+    <div id="app">
+        <router-link to="/login/12" tag="span">登录</router-link>
+        <router-link to="/register">注册</router-link>
+       <transition mode="out-in">
+        <router-view></router-view>
+       </transition>
+    </div>
+<script>
+    var login = {
+        template:'<h3>login组件</h3>',
+        data() {
+            return {
+                msg:'123'
+            }
+        },
+        created() {
+            console.log(this.$route.params.id);
+        },
+    }
+    var register = {
+        template:'<h3>register组件</h3>'
+    }
+    var router1 = new VueRouter({
+        //表示路由匹对规则
+        routes:[
+            //每个路由规则都是一个对象
+            //属性1：path表示监听哪个路由链接地址
+            //属性2：component表示根据path路由，展示相应的component
+            //注意：component必须是一个模板对象，不能是一个组件的名称
+            {path:'/',redirect:login},
+            {path:'/login:13',component:login},
+            {path:'/register',component:register}
+        ],
+        linkActiveClass:'myactive'
+    })
+    var vm = new Vue({
+      el: '#app',
+      methods: {
+          get(){
+              console.log(this.$refs.mytem.msg);
+              this.$refs.mytem.get1();          
+            }
+      },
+      router:router1//将router注册到VM实例上
+    })
+</script>
+</body>
+</html>

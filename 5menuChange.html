@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+        transform: translateX(80px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition: all 1s ease;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <a href="" @click.prevent="componentId='runoob'">ddd</a>
+        <a href="" @click.prevent="componentId='rrr'">sss</a>
+        <transition mode='out-in'>
+            <component :is="componentId">
+                <runoob></runoob>
+                <rrr></rrr>
+            </component>
+        </transition>
+    </div>
+    <script>
+        Vue.component('runoob', {
+            template: '<li>iuiuouou</li>'
+        });
+        Vue.component('rrr', {
+            template: '<li>yyyyyyyyyyyyyyyyy</li>'
+        })
+        // 创建根实例
+        new Vue({
+            el: '#app',
+            data: {
+                componentId: 'runoob',
+                flag: true
+            }
+        })
+    </script>
+</body>
+
+</html>
